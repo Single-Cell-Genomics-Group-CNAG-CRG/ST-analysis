@@ -26,7 +26,8 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 Things to keep in mind when processing the data
 
 - Optimal Read length for confident mapping Spaceranger v1.1.0
-[Read length mapping](!)
+
+![](img/spaceranger-v1.1.0_read-length.png)
 
 
 ## QC
