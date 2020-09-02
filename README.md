@@ -23,11 +23,10 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 - [DOROTHEA](https://bioconductor.org/packages/release/data/experiment/html/dorothea.html) Saez-Rodriguez lab.This package contains human and mouse TF regulons. The human regulons were curated and collected from different types of evidence such as literature curated resources, ChIP-seq peaks, TF binding site motifs and interactions inferred directly from gene expression. The mouse regulons were constructed by mapping the human gene symbols to their orthologs in mice. Those regulons can be coupled with any statistical method that aims to analyse gene sets to infer TF activity from gene expression data. Preferably the statistical method viper is used.
 
 ## General Comments
-Things to keep in mind when processing the data
+Things to keep in mind when pre-processing the data
 
 - Optimal Read length for confident mapping Spaceranger v1.1.0
-
-![](img/spaceranger-v1.1.0_read-length.png)
-
+<img src="img/spaceranger-v1.1.0_read-length.png" width="500">
+- Make sure the slice images form the Visium slide contain all the dotted borders and corners. These are necessary to automatically align the image and the spots.
 
 ## QC
