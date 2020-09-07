@@ -23,6 +23,12 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 - [Omnipath](https://saezlab.github.io/OmnipathR/articles/OmnipathMainVignette.html) Saez-Rodriguez lab. A comprehensive collection of molecular biology prior knowledge from 103 databases, with focus on literature curated human and rodent signaling pathways. Software suite for functional omics data analysis and mechanistic modeling of intra- and inter-cellular signaling.
 - [DOROTHEA](https://bioconductor.org/packages/release/data/experiment/html/dorothea.html) Saez-Rodriguez lab.This package contains human and mouse TF regulons. The human regulons were curated and collected from different types of evidence such as literature curated resources, ChIP-seq peaks, TF binding site motifs and interactions inferred directly from gene expression. The mouse regulons were constructed by mapping the human gene symbols to their orthologs in mice. Those regulons can be coupled with any statistical method that aims to analyse gene sets to infer TF activity from gene expression data. Preferably the statistical method viper is used.
 
+#### Deconvolution tools
+- [SPOTlight](https://github.com/MarcElosua/SPOTlight) developed by Marc Elosua from Holger Hey lab.
+- [Stereoscope](https://github.com/almaan/stereoscope) developed by Alma Andersson from Lundeberg Lab.
+- [cell2location](https://github.com/BayraktarLab/cell2location) developed by Vitalii Kleshchevnikov from Bayraktar lab. 
+- [Robust Cell Type Decomposition](https://github.com/dmcable/RCTD) developed by Dylan M. Cable from Irizarry lab.
+
 ## General Comments
 Things to keep in mind when pre-processing the data
 
