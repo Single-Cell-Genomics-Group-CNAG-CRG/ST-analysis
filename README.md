@@ -11,6 +11,7 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 - [STUtility](https://github.com/jbergenstrahle/STUtility) developed by Joseph Bergenstråhle and Ludvig Larsson from  Joakim Lundeberg lab.
 - [Giotto](http://spatialgiotto.rc.fas.harvard.edu/) developed by Ruben Dries from Guo-Cheng Yuan lab.
 - [Spaniel](https://www.biorxiv.org/content/10.1101/619197v1) developed by Rachel Queen
+- [starmapVR](https://github.com/holab-hku/starmapVR) developed by Andrian Yang to visualize single-cell and spatial omic data in 3D
 
 ### Python
 - [scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/spatial/basic-analysis.html) developed by Giovanni Palla from Fabian Theis Lab.
@@ -30,3 +31,5 @@ Things to keep in mind when pre-processing the data
 - Make sure the slice images form the Visium slide contain all the dotted borders and corners. These are necessary to automatically align the image and the spots.
 
 ## QC
+- Remove all spots not overlapping tissue. When there are tissueless regions within the capture areas, especially within the tissue there might be some lateral diffusion and reads may map to those spots. It is important to remove those spots manually using spaceranger prior to alignment!
+- Before processing the data check that there are no empty spots overlaying the tissue.
