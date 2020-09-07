@@ -31,5 +31,16 @@ Things to keep in mind when pre-processing the data
 - Make sure the slice images form the Visium slide contain all the dotted borders and corners. These are necessary to automatically align the image and the spots.
 
 ## QC
+[STUtility](https://ludvigla.github.io/STUtility_web_site/Quality_Control.html) shows a great workflow on how to carry out QC analysis on ST data!
 - Remove all spots not overlapping tissue. When there are tissueless regions within the capture areas, especially within the tissue there might be some lateral diffusion and reads may map to those spots. It is important to remove those spots manually using spaceranger prior to alignment!
 - Before processing the data check that there are no empty spots overlaying the tissue.
+- Explore number of reads and genes on the slice
+- Explore mitochondrial content on the slice
+```
+mt.genes <- grep(pattern = "^MT-")
+```
+- Explore ribosomal content on the slice
+```
+ribo.genes <- grep(pattern = "^RPL|^RPS")
+```
+- No hard thresholds are set to remove spots based on the prior parameters. It is important to understand the biology of the tissue under study in order to process the data accordingly. 
