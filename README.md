@@ -33,7 +33,7 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 
 #### Cell-Cell interactions
 - [CellPhoneDB](https://github.com/Teichlab/cellphonedb) developed by Roser Vento. CellPhoneDB is a publicly available repository of curated receptors, ligands and their interactions. Subunit architecture is included for both ligands and receptors, representing heteromeric complexes accurately. This is crucial, as cell-cell communication relies on multi-subunit protein complexes that go beyond the binary representation used in most databases and studies.
-- [sctalk](https://github.com/VCCRI/scTalk/) developed by Farbehi. N scTalk is an R package for intercellular communication (ligand-receptor) analysis from scRNA-seq data and implements the method described in [Farbehi et al](https://elifesciences.org/articles/43882).
+- [scTalk](https://github.com/VCCRI/scTalk/) developed by Farbehi. N scTalk is an R package for intercellular communication (ligand-receptor) analysis from scRNA-seq data and implements the method described in [Farbehi et al](https://elifesciences.org/articles/43882).
 
 ## General Comments
 Things to keep in mind when pre-processing the data
