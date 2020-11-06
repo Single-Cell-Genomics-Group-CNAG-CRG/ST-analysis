@@ -26,6 +26,7 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 - [Spaniel](https://www.biorxiv.org/content/10.1101/619197v1) developed by Rachel Queen
 - [starmapVR](https://github.com/holab-hku/starmapVR) developed by Andrian Yang to visualize single-cell and spatial omic data in 3D
 - [Baysor](https://www.biorxiv.org/content/10.1101/2020.10.05.326777v1.full) developed by Viktor Petukhov from Kharchenko lab. Bayesian Segmentation of Spatial Transcriptomics Data (**-ISH + In situ sequencing**) (Baysor), which optimizes segmentation considering the likelihood of transcriptional composition, size and shape of the cell. The Bayesian approach can take into account nuclear or cytoplasm staining, however can also perform segmentation based on the detected transcripts alone.
+- [MEFISTO](https://biofam.github.io/MOFA2/MEFISTO.html) developed by Britta Velten, it is a flexible and versatile toolbox for modelling high-dimensional data when spatial or temporal dependencies between the samples are known. MEFISTO maintains the established benefits of factor analysis for multi-modal data, but enables performing spatio-temporally informed dimensionality reduction, interpolation and separation of smooth from non-smooth patterns of variation. Moreover, MEFISTO can integrate multiple related datasets by simultaneously identifying and aligning the underlying patterns of variation in a data-driven manner.
 
 #### Deconvolution tools
 - [SPOTlight](https://github.com/MarcElosua/SPOTlight) developed by Marc Elosua from Holger Hey lab.
