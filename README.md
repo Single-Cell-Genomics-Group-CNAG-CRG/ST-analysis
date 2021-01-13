@@ -39,8 +39,11 @@ General notes and resources on how to analyze Spatial Transcriptomics data
 - [scTalk](https://github.com/VCCRI/scTalk/) developed by Farbehi. N scTalk is an R package for intercellular communication (ligand-receptor) analysis from scRNA-seq data and implements the method described in [Farbehi et al](https://elifesciences.org/articles/43882).
 - [NATMI](https://www.nature.com/articles/s41467-020-18873-z) developed by Rui Hou. NATMI uses connectomeDB2020 (a database of 2293 manually curated ligand-receptor pairs with literature support) to predict and visualise cell-to-cell communication networks from single-cell (or bulk) expression data. GitHub repo [here](https://github.com/forrest-lab/NATMI/).
 
-#### Deep learning tools
+#### Digital pathology
 - [Deeplearning-digital-pathology](https://github.com/zhaoxuanma/Deeplearning-digital-pathology) This repository contains utilities for virtual slides and images classification and semantic segmentation with Keras and Caffe and an extension class of ImageDataGenerator of Keras to generate batches of images with data augmentation for segmentation. Demo code is provided for reference.
+- [VAMPIRE](https://www.nature.com/articles/s41596-020-00432-x) Cell morphology encodes essential information on many underlying biological processes. It is commonly used by clinicians and researchers in the study, diagnosis, prognosis, and treatment of human diseases. Quantification of cell morphology has seen tremendous advances in recent years. However, effectively defining morphological shapes and evaluating the extent of morphological heterogeneity within cell populations remain challenging. Here we present a protocol and software for the analysis of cell and nuclear morphology from fluorescence or bright-field images using the VAMPIRE algorithm (https://github.com/kukionfr/VAMPIRE_open). [tweetorial](https://twitter.com/JudeM_Phillip/status/1348669520194359307)
+
+
 ## General Comments
 Things to keep in mind when pre-processing the data
 
