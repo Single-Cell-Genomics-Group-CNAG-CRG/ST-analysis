@@ -37,6 +37,7 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 - [Spaniel](https://www.biorxiv.org/content/10.1101/619197v1) developed by Rachel Queen
 - [starmapVR](https://github.com/holab-hku/starmapVR) developed by Andrian Yang to visualize single-cell and spatial omic data in 3D
 - [Baysor](https://www.biorxiv.org/content/10.1101/2020.10.05.326777v1.full) developed by Viktor Petukhov from Kharchenko lab. Bayesian Segmentation of Spatial Transcriptomics Data (**-ISH + In situ sequencing**) (Baysor), which optimizes segmentation considering the likelihood of transcriptional composition, size and shape of the cell. The Bayesian approach can take into account nuclear or cytoplasm staining, however can also perform segmentation based on the detected transcripts alone.
+- 
 
 #### Spatio-Temporal analsysi
 - [MEFISTO](https://biofam.github.io/MOFA2/MEFISTO.html) developed by Britta Velten, it is a flexible and versatile toolbox for modelling high-dimensional data when spatial or temporal dependencies between the samples are known. MEFISTO maintains the established benefits of factor analysis for multi-modal data, but enables performing spatio-temporally informed dimensionality reduction, interpolation and separation of smooth from non-smooth patterns of variation. Moreover, MEFISTO can integrate multiple related datasets by simultaneously identifying and aligning the underlying patterns of variation in a data-driven manner.
@@ -58,8 +59,10 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 #### Digital pathology
 - [Deeplearning-digital-pathology](https://github.com/zhaoxuanma/Deeplearning-digital-pathology) This repository contains utilities for virtual slides and images classification and semantic segmentation with Keras and Caffe and an extension class of ImageDataGenerator of Keras to generate batches of images with data augmentation for segmentation. Demo code is provided for reference.
 - [VAMPIRE](https://www.nature.com/articles/s41596-020-00432-x) Cell morphology encodes essential information on many underlying biological processes. It is commonly used by clinicians and researchers in the study, diagnosis, prognosis, and treatment of human diseases. Quantification of cell morphology has seen tremendous advances in recent years. However, effectively defining morphological shapes and evaluating the extent of morphological heterogeneity within cell populations remain challenging. Here we present a protocol and software for the analysis of cell and nuclear morphology from fluorescence or bright-field images using the VAMPIRE algorithm (https://github.com/kukionfr/VAMPIRE_open). [tweetorial](https://twitter.com/JudeM_Phillip/status/1348669520194359307)
-
-
+##### Lymphocyte detection
+- [Automatic Lymphocyte Detection on Gastric Cancer IHC Images Using Deep Learning](https://ieeexplore.ieee.org/document/8104187): Tumor-infiltrating lymphocytes (TILs) have received considerable attention in recent years, as evidence suggests they are related to cancer prognosis. Distribution and localization of these and other types of immune cells are of special interest for pathologists, and frequently involve manual examination on Immunohistochemistry (IHC) Images. We present a model based on Deep Convolutional Neural Networks for Automatic lymphocyte detection on IHC images of gastric cancer. The dataset created as part of this work is publicly available for future research.
+- [Convolutional Neural Networks for Lymphocyte detection in Immunohistochemically Stained Whole-Slide Images](https://openreview.net/forum?id=rk0xLisiM): 
+- [https://pubmed.ncbi.nlm.nih.gov/31476576/](https://pubmed.ncbi.nlm.nih.gov/31476576/):
 ## General Comments
 Things to keep in mind when pre-processing the data
 
