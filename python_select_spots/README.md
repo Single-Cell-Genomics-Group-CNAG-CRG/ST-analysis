@@ -5,21 +5,20 @@ For example if you have spot_selection.py in your working directory now you can 
 
 ```
 export PYTHONPATH="$PWD
-
 ```
 
 And everytime you import it in a python script, python will look at this directory to do it. 
 
 In addition, this are the python packages needed to run the example (all of them can be installed with conda):
 
-python v>=3.5
-bokeh
-pandas
-numpy
-scanpy
-matplotlib
-seaborn
-notebook
+python v>=3.5 <br>
+bokeh <br>
+pandas <br>
+numpy <br>
+scanpy <br>
+matplotlib <br>
+seaborn <br>
+notebook <br>
 
 The `example.ipynb` notebook shows a working example of how to use it. 
 
