@@ -1,0 +1,346 @@
+---
+title: "QC MARANZUELMO_"
+author: "Marc Elosua-Bayes"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%", fig.align='center', 
+                      message = FALSE, warning = FALSE)
+options(width = 1200)
+```
+
+## Introduction
+This script is set to carry out QC visualization and filtering of Visium slides so as to prepare them for subsequent analysis.
+We use as a reference QC workflow the one shown in [STutility](https://ludvigla.github.io/STUtility_web_site/Quality_Control.html) 
+
+## Libraries
+
+```{r}
+library(Seurat)
+library(ggpubr)
+library(cowplot)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(readr)
+```
+
+## Setting parameters
+Loading necessary paths and parameters
+```{r}
+source(here::here("misc/paths.R"))
+source(here::here("utils/bin.R"))
+
+"{qc}/{plt_dir}" %>%
+  glue::glue() %>%
+  here::here() %>%
+  dir.create(path = .,
+           showWarnings = FALSE,
+           recursive = TRUE)
+
+"{qc}/{robj_dir}" %>%
+  glue::glue() %>%
+  here::here() %>%
+  dir.create(path = .,
+           showWarnings = FALSE,
+           recursive = TRUE)
+```
+
+## Load data
+We have 8 different datasets that we are going to analyze separately.
+```{r}
+sp_ls <- lapply(id_sp_df$gem_id, function(gem_id) {
+  spaceranger_data <- glue::glue("{spaceranger}/{gem_id}/outs")
+
+  sample_id <- id_sp_df[id_sp_df$gem_id == gem_id, ] %>%
+    dplyr::pull(donor_id)
+  
+  se_obj <- Seurat::Load10X_Spatial(data.dir = here::here(spaceranger_data),
+                                    filename = "filtered_feature_bc_matrix.h5",
+                                    assay = "Spatial",
+                                    slice = sample_id,
+                                    filter.matrix = TRUE)
+  
+  se_obj[["gem_id"]] <- gem_id
+  se_obj[["sample_id"]] <- sample_id
+  
+  return(se_obj)
+})
+
+se_obj <- merge(sp_ls[[1]],
+                y = sp_ls[2:length(sp_ls)],
+                add.cell.ids = id_sp_df$gem_id,
+                project = "SALAS")
+```
+
+Add mitochondrial and ribosomal %
+```{r}
+# Collect all genes coded on the mitochondrial genome
+se_obj[["percent.mito"]] <- Seurat::PercentageFeatureSet(
+  object = se_obj,
+  pattern = "^MT-")
+summary(se_obj[["percent.mito"]])
+
+# Collect all genes coding for ribosomal proteins
+se_obj[["percent.ribo"]] <- Seurat::PercentageFeatureSet(
+  object = se_obj,
+  pattern = "^RPL|^RPS")
+summary(se_obj[["percent.ribo"]])
+```
+
+## QC Analysis
+
+### Remove empty genes
+We start by removing those genes that aren't expressed in any of the spots overlaying the tissue
+```{r}
+table(rowSums(as.matrix(se_obj@assays$Spatial@counts)) == 0)
+
+keep_genes <- rowSums(as.matrix(se_obj@assays$Spatial@counts)) != 0
+se_obj <- se_obj[keep_genes, ]
+```
+
+### Basic features
+#### Number of genes
+We start by plotting some basic features that will help us visualize and define filtering options.
+We start by plotting the number of genes per spot, *complexity*, to assess if there are empty spots or huge disparity.
+```{r fig.height=8, fig.width=12}
+p1 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = se_obj[[]], 
+                          ggplot2::aes(nFeature_Spatial),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::ggtitle("Unique genes per spot") +
+  ggplot2::labs(x = "Number of Detected Genes",
+                y = "Number of Spots") +
+  ggpubr::theme_pubr()
+
+p1
+```
+
+After looking at the distribution we are also going to look at how these spots look on the tissue
+```{r fig.height=12, fig.width=12}
+lapply(id_sp_df$gem_id, function(gem_id) {
+  
+  sample_id <- id_sp_df[id_sp_df$gem_id == gem_id, ] %>% dplyr::pull(donor_id)
+  
+  Seurat::SpatialFeaturePlot(
+    object = se_obj[, se_obj$gem_id == gem_id],
+    features = "nFeature_Spatial",
+    images = glue::glue("X{sample_id}")) +
+    ggplot2::labs(title = sample_id) +
+    ggplot2::theme(plot.title = element_text(hjust = 0.5, size = 18))
+  
+}) %>% cowplot::plot_grid(
+  plotlist = .,
+  align = "hv",
+  axis = "trbl")
+```
+
+#### Number of reads
+Next we want to look at the number of reads captured per spot, this should correlate with spot complexity and will allow us to see regions with higher transcriptional activty.
+```{r fig.height=8, fig.width=12}
+p2 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = se_obj[[]],
+                          ggplot2::aes(nCount_Spatial),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::ggtitle("Total counts per spots") +
+  ggplot2::labs(x = "Library Size (total UMI)",
+                y = "Number of Spots") +
+  ggpubr::theme_pubr()
+
+p2
+```
+
+```{r fig.height=12, fig.width=12}
+lapply(id_sp_df$gem_id, function(gem_id) {
+  
+  sample_id <- id_sp_df[id_sp_df$gem_id == gem_id, ] %>% dplyr::pull(donor_id)
+  
+  Seurat::SpatialFeaturePlot(
+    object = se_obj[, se_obj$gem_id == gem_id],
+    features = "nCount_Spatial",
+    images = glue::glue("X{sample_id}")) +
+    ggplot2::labs(title = sample_id) +
+    ggplot2::theme(plot.title = element_text(hjust = 0.5, size = 18))
+  
+}) %>% cowplot::plot_grid(plotlist = .)
+```
+
+#### Gene counts
+Another characteristic we want to look at is how many counts per gene there are since we want to remove lowly expressed genes which aren't giving information but potentially introducing noise.
+```{r fig.height=8, fig.width=12}
+count_mtrx <- Seurat::GetAssayData(object = se_obj,
+                                   slot = "counts",
+                                   assay = "Spatial")
+
+gene_attr <- lapply(id_sp_df$gem_id, function(gem_id) {
+  mask <- stringr::str_detect(
+    string = colnames(count_mtrx),
+    pattern = gem_id)
+  
+  gene_attr <- data.frame(
+    nUMI = Matrix::rowSums(count_mtrx[, mask]), 
+    nSpots = Matrix::rowSums(count_mtrx[, mask] > 0),
+    gem_id = gem_id,
+    sample_id = id_sp_df[id_sp_df$gem_id == gem_id, ] %>% dplyr::pull(donor_id))
+}) %>%
+  dplyr::bind_rows()
+
+p3 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = gene_attr,
+                          ggplot2::aes(nUMI),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::scale_x_log10() +
+  ggplot2::ggtitle("Total counts per gene (log10 scale)") +
+  ggpubr::theme_pubr()
+p3
+```
+
+#### Gene ubiquitousness
+We also look at on how many spots each gene is detected, we see there are a few genes expressed in almost all the spots while and a majority of genes detected in few spots.
+```{r fig.height=8, fig.width=12}
+p4 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = gene_attr,
+                          ggplot2::aes(nSpots),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::ggtitle("Total spots per gene") +
+  ggpubr::theme_pubr()
+
+p4
+```
+
+#### Mitochondrial %
+Next we take a look at the mitochondrial %; This metric can help us get a first glimpse of metabolic activity and/or necrotic regions - 10X explains [here](https://kb.10xgenomics.com/hc/en-us/articles/360001086611-Why-do-I-see-a-high-level-of-mitochondrial-gene-expression-)
+```{r fig.height=8, fig.width=12}
+p5 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = se_obj[[]], 
+                          ggplot2::aes(percent.mito),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::ggtitle("Mitochondrial % per spot") +
+  ggplot2::labs(x = "Mitochondrial % ",
+                y = "Number of Spots") +
+  ggpubr::theme_pubr()
+p5
+```
+
+```{r fig.height=12, fig.width=12}
+lapply(id_sp_df$gem_id, function(gem_id) {
+  
+  sample_id <- id_sp_df[id_sp_df$gem_id == gem_id, ] %>% dplyr::pull(donor_id)
+  
+  Seurat::SpatialFeaturePlot(
+    object = se_obj[, se_obj$gem_id == gem_id],
+    features = "percent.mito",
+    images = glue::glue("X{sample_id}")) +
+    ggplot2::labs(title = sample_id) +
+    ggplot2::theme(plot.title = element_text(hjust = 0.5, size = 18))
+  
+}) %>% cowplot::plot_grid(plotlist = .)
+```
+
+#### Ribosomal %
+Lastly we look at the ribosomal % which gives us insight into which regions are the most transcriptomically active when looked side by side with the number of detected genes.
+```{r fig.height=8, fig.width=12}
+p6 <- ggplot2::ggplot() +
+  ggplot2::geom_histogram(data = se_obj[[]], 
+                          ggplot2::aes(percent.ribo),
+                          fill = "red",
+                          alpha = 0.7,
+                          color = "red",
+                          bins = 50) +
+  ggplot2::facet_wrap(. ~ sample_id, scales = "free") +
+  ggplot2::ggtitle("Ribosomal % per spot") +
+  ggplot2::labs(x = "Ribosomal % ",
+                y = "Number of Spots") +
+  ggpubr::theme_pubr()
+p6
+```
+
+```{r fig.height=12, fig.width=12}
+lapply(id_sp_df$gem_id, function(gem_id) {
+  
+  sample_id <- id_sp_df[id_sp_df$gem_id == gem_id, ] %>% dplyr::pull(donor_id)
+  
+  Seurat::SpatialFeaturePlot(
+    object = se_obj[, se_obj$gem_id == gem_id],
+    features = "percent.ribo",
+    images = glue::glue("X{sample_id}")) +
+    ggplot2::labs(title = sample_id) +
+    ggplot2::theme(plot.title = element_text(hjust = 0.5, size = 18))
+  
+}) %>% cowplot::plot_grid(plotlist = .)
+```
+
+### Feature covariation
+Next we look at how these features covariate.
+```{r fig.height=15, fig.width=15}
+plt_covar_ls <- qc_covar_plots(se = se_obj,
+                               nfeat = "nFeature_Spatial",
+                               ncount = "nCount_Spatial",
+                               slot = "counts",
+                               assay = "Spatial",
+                               percent.mito = "percent.mito",
+                               percent.ribo = "percent.ribo",
+                               facet = "sample_id")
+
+cowplot::plot_grid(plotlist = plt_covar_ls, ncol = 2, align = "hv", axis = "trbl")
+```
+
+## Filtering spots
+```{r echo = FALSE}
+qc_message <- "Consider filtering spots in sample 585-2, there seems to be a region with lower feature and gene counts."
+```
+
+`r qc_message`
+
+## Save RDS
+Save the object to use downstream.
+```{r}
+lapply(id_sp_df$donor_id, function(id) {
+  
+  se_obj_sub <- se_obj[, se_obj$sample_id == id]
+  gem_id <- unique(se_obj_sub$gem_id)
+  
+  # Remove other images
+  se_obj_sub@images <- se_obj_sub@images[Seurat::Images(se_obj_sub) == id]
+  
+  "{qc}/{robj_dir}/qc_se_{id}.rds" %>%
+    glue::glue() %>%
+    here::here() %>%
+    saveRDS(
+      object = se_obj_sub,
+      file = .)
+})
+```
+
+## Session Info
+```{r}
+sessionInfo()
+```
+
