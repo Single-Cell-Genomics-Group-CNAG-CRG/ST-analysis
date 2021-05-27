@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Guidelines Spatial Transcriptomics </title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d0b182fe-25fb-4cf0-ac41-9ae50804e31f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤖</span></div><h1 class="page-title">Guidelines Spatial Transcriptomics </h1></header><div class="page-body"><p id="be03e8f7-3f29-4497-8453-e70c3a61fecb" class="">This is a guide to install basic tools for ST analysis using a conda environment for the sake of reproducibility. </p><nav id="62adc41e-fc8e-4510-b30e-a275dcf40360" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#44cb333f-a158-4bba-9851-6fe18d978330">Commands to follow</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5d42454b-4617-4f1d-bfa6-0bc088205a8f">Cluster</a></div></nav><h1 id="44cb333f-a158-4bba-9851-6fe18d978330" class="">Commands to follow</h1><p id="aca6a82c-97c0-4c17-be0c-d05e4db7fdc3" class="">This HTML was created with Notion. In Notion, you can create <code>inline code snippets</code> with the shortcut <code>cmd/ctrl + e</code>.</p><pre id="ee08e787-da9d-4eb1-acb0-243989b24a66" class="code"><code>conda create -n spatial_r
+conda activate spatial_r
+conda install -c conda-forge r-base=4.0.1</code></pre><p id="f6ec50e6-256f-40e9-aa0a-dfd03a5703db" class=""><strong>Install SPATA2</strong></p><p id="3c9b3be3-4d2d-4263-a23c-e41228dec9ca" class="">The following package is a dependency for some of the BiocManager packages that will be installed in the future.</p><pre id="1d2b17f2-31a1-4674-9ceb-7fe5f8d66277" class="code"><code>conda install -c eumetsat fftw3
+#conda install -c conda-forge imagemagick #necessary for the cluster</code></pre><p id="b4389309-2838-448f-9b5d-c5e0a5b4ee66" class="">Now let&#x27;s go to R</p><pre id="3a13ca82-b0b7-4b48-976c-3355b4f0fcd6" class="code"><code>R</code></pre><pre id="5a2f28f5-732b-46cc-a26a-9de428db6a5d" class="code"><code>install.packages(&quot;devtools&quot;)
+if (!base::requireNamespace(&quot;BiocManager&quot;, quietly = TRUE)){
+      install.packages(&quot;BiocManager&quot;)
+  }
+BiocManager::install(c(&#x27;BiocGenerics&#x27;, &#x27;DelayedArray&#x27;, &#x27;DelayedMatrixStats&#x27;,
+                       &#x27;limma&#x27;, &#x27;S4Vectors&#x27;, &#x27;SingleCellExperiment&#x27;,
+                       &#x27;SummarizedExperiment&#x27;, &#x27;batchelor&#x27;, &#x27;Matrix.utils&#x27;, &#x27;EBImage&#x27;))
+
+install.packages(&quot;Seurat&quot;)
+devtools::install_github(repo = &quot;kueckelj/confuns&quot;)</code></pre><p id="26377858-64dd-4606-8e1e-40de0de905f3" class="">Go back to the terminal  and use conda to install the following:</p><pre id="d7a8ef00-5db0-46a8-ae50-6a6c47b0a044" class="code"><code>conda install -c conda-forge udunits2
+##libgal package downstream will install proj and r-proj4 automatically but I pre-installed in this order of commands
+#conda install -c conda-forge r-proj4 
+conda install -c conda-forge r-v8</code></pre><pre id="78118f7c-a709-405e-a987-62e7db803193" class="code"><code>##the commented lines were executed but I&#x27;m not sure those made any difference
+#sudo apt remove libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+#sudo apt install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
+conda install -c conda-forge libgdal
+R</code></pre><pre id="7a47a27b-ac43-4d7b-bb18-fc8e70208c8a" class="code"><code>install.packages(&quot;sf&quot;)
+devtools::install_github(repo = &quot;theMILOlab/SPATA2&quot;)
+devtools::install_github(&#x27;cole-trapnell-lab/leidenbase&#x27;)
+devtools::install_github(&#x27;cole-trapnell-lab/leidenbase&#x27;)</code></pre><p id="c83d33e2-085f-4074-9a15-bee5aec7b3fe" class=""><strong>Install common packages</strong></p><pre id="113d4c31-5a5d-45f2-8aea-98e417725c19" class="code"><code>install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;gt&quot;)
+install.packages(&quot;ggpubr&quot;)
+install.packages(&quot;ggrepel&quot;)
+install.packages(&quot;rmarkdown&quot;)
+install.packages(&quot;knitr&quot;)
+install.packages(&quot;DT&quot;)
+install.packages(&quot;here&quot;)
+
+if (!requireNamespace(&quot;remotes&quot;, quietly = TRUE)) {
+  install.packages(&quot;remotes&quot;)
+}
+remotes::install_github(&quot;mojaveazure/seurat-disk&quot;)
+
+#install.packages(&quot;spdep&quot;) #necessary for the cluster
+
+devtools::install_github(
+    &quot;jbergenstrahle/STUtility&quot;
+)
+
+remotes::install_github(&quot;saezlab/mistyR&quot;)
+
+BiocManager::install(&quot;progeny&quot;)
+BiocManager::install(&quot;dorothea&quot;)</code></pre><p id="3dc8896b-bce2-43a4-a991-3d2d81dce0d3" class=""><strong>Install SPOTlight</strong></p><p id="97d6cdf5-9716-42b1-941d-770d1a3361f4" class="">In the terminal, install this </p><pre id="db1d9470-bb3a-499b-b4d4-f35bb6f42eea" class="code"><code>conda install -c anaconda gmp</code></pre><pre id="647bccc8-85e1-4fd1-9bb3-04f361e47c77" class="code"><code>install.packages(&quot;gmp&quot;)
+install.packages(&quot;arrangements&quot;)</code></pre><p id="68e3d48b-62b1-41bb-8901-7e89868cbf23" class="">I encountered lots of problems to install <code>imager</code> from CRAN due to X11 library. That&#x27;s why the following commands are commented because I don&#x27;t know whether they influenced in the final installation of <code>r-imager</code> by conda.</p><pre id="5237cca8-3a27-4d45-ab47-bc32c3ca4a9e" class="code"><code>#conda install -c conda-forge xorg-libx11
+#conda install -c borismarin libx11
+#sudo apt install xorg
+#sudo apt install libx11-dev
+conda install -c conda-forge r-imager</code></pre><pre id="4b3258d7-4e2b-4f33-b1d9-9fb8d3852687" class="code"><code>devtools::install_github(&quot;https://github.com/MarcElosua/SPOTlight&quot;)</code></pre><p id="dcd59f8b-6f96-426f-ab15-08232d5e64c7" class=""><strong>Install Harmony</strong></p><pre id="c3c26598-d41c-46c1-b882-8be2852ea402" class="code"><code>devtools::install_github(&quot;immunogenomics/harmony&quot;)</code></pre><p id="5fc0b74d-8fb1-43ab-b7fd-836aea1e4306" class=""><strong>Install MAGIC</strong></p><pre id="2463b0c5-019f-40f0-85fd-4d58f65c23c6" class="code"><code>conda install -c bioconda scprep
+conda install matplotlib future tasklogger graphtools scipy pandas Deprecated pygsp pytz python-dateutil six threadpoolctl joblib decorator wrapt cycler kiwisolver pyparsing pillow
+conda install -c anaconda zlib
+R
+install.packages(&quot;Rmagic&quot;)</code></pre><h1 id="5d42454b-4617-4f1d-bfa6-0bc088205a8f" class="">Cluster</h1><p id="4b2a2bc3-abf8-4160-8ae5-05228245a1b7" class="">Load all these modules to be able to install SPATA2 in the cluster</p><pre id="2fb1fda3-85b3-4fbb-949a-34dae4382ac1" class="code"><code>module load R/4.0.1 PROJ/7.0.1 GDAL/2.4.2 GEOS/3.4.2 UDUNITS/2.2.26
+install.packages(&quot;sf&quot;, configure.args = c(sf = &quot;--with-proj-include=/apps/PROJ/7.0.1/include&quot;))</code></pre><p id="bc50090d-41af-4a50-9b74-8da8ced0bb27" class="">
+</p></div></article></body></html>
