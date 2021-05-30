@@ -52,4 +52,3 @@ RUN R -e "Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS=TRUE); \
         remotes::install_github('mojaveazure/seurat-disk'); \
         devtools::install_github('jbergenstrahle/STUtility'); \
         remotes::install_github('saezlab/mistyR')"
-
