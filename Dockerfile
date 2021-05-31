@@ -3,6 +3,7 @@ FROM rocker/tidyverse:4.0.1
 MAINTAINER Marc Elosua-Bayes
 
 #### Install SpaceDecon packages ####
+# -y flag to quickly install the packages and dependencies
 RUN apt-get update -y && \
     apt-get install -y \
     fftw3-dev \
@@ -24,7 +25,8 @@ RUN apt-get update -y && \
     libgmp-dev \
     fftw-dev \
     r-cran-igraph \
-    libglpk-dev
+    libglpk-dev \
+    pandoc
 
 #### Install CRAN packages ####
 RUN R -e "install.packages(c('gt', 'cowplot', 'xlsx', 'sf', 'igraph', \
