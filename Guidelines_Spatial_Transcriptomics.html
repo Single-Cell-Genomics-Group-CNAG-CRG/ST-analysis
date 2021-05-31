@@ -1,4 +1,5 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Guidelines Spatial Transcriptomics </title><style>
+/* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
 	-webkit-print-color-adjust: exact;
@@ -627,17 +628,20 @@ blockquote {
 </style></head><body><article id="d0b182fe-25fb-4cf0-ac41-9ae50804e31f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤖</span></div><h1 class="page-title">Guidelines Spatial Transcriptomics </h1></header><div class="page-body"><p id="be03e8f7-3f29-4497-8453-e70c3a61fecb" class="">This is a guide to install basic tools for ST analysis using a conda environment for the sake of reproducibility. </p><nav id="62adc41e-fc8e-4510-b30e-a275dcf40360" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#44cb333f-a158-4bba-9851-6fe18d978330">Commands to follow</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5d42454b-4617-4f1d-bfa6-0bc088205a8f">Cluster</a></div></nav><h1 id="44cb333f-a158-4bba-9851-6fe18d978330" class="">Commands to follow</h1><p id="aca6a82c-97c0-4c17-be0c-d05e4db7fdc3" class="">This HTML was created with Notion. In Notion, you can create <code>inline code snippets</code> with the shortcut <code>cmd/ctrl + e</code>.</p><pre id="ee08e787-da9d-4eb1-acb0-243989b24a66" class="code"><code>conda create -n spatial_r
 conda activate spatial_r
 conda install -c conda-forge r-base=4.0.1</code></pre><p id="f6ec50e6-256f-40e9-aa0a-dfd03a5703db" class=""><strong>Install SPATA2</strong></p><p id="3c9b3be3-4d2d-4263-a23c-e41228dec9ca" class="">The following package is a dependency for some of the BiocManager packages that will be installed in the future.</p><pre id="1d2b17f2-31a1-4674-9ceb-7fe5f8d66277" class="code"><code>conda install -c eumetsat fftw3
-#conda install -c conda-forge imagemagick #necessary for the cluster</code></pre><p id="b4389309-2838-448f-9b5d-c5e0a5b4ee66" class="">Now let&#x27;s go to R</p><pre id="3a13ca82-b0b7-4b48-976c-3355b4f0fcd6" class="code"><code>R</code></pre><pre id="5a2f28f5-732b-46cc-a26a-9de428db6a5d" class="code"><code>install.packages(&quot;devtools&quot;)
+#conda install -c conda-forge imagemagick #necessary for the cluster
+#conda install -c conda-forge pandoc #necessary for the cluster</code></pre><p id="b4389309-2838-448f-9b5d-c5e0a5b4ee66" class="">Now let&#x27;s go to R</p><pre id="3a13ca82-b0b7-4b48-976c-3355b4f0fcd6" class="code"><code>R</code></pre><pre id="5a2f28f5-732b-46cc-a26a-9de428db6a5d" class="code"><code>install.packages(&quot;devtools&quot;)
 if (!base::requireNamespace(&quot;BiocManager&quot;, quietly = TRUE)){
       install.packages(&quot;BiocManager&quot;)
   }
 BiocManager::install(c(&#x27;BiocGenerics&#x27;, &#x27;DelayedArray&#x27;, &#x27;DelayedMatrixStats&#x27;,
                        &#x27;limma&#x27;, &#x27;S4Vectors&#x27;, &#x27;SingleCellExperiment&#x27;,
-                       &#x27;SummarizedExperiment&#x27;, &#x27;batchelor&#x27;, &#x27;Matrix.utils&#x27;, &#x27;EBImage&#x27;))
+                       &#x27;SummarizedExperiment&#x27;, &#x27;batchelor&#x27;, &#x27;Matrix.utils&#x27;, 
+                       &#x27;EBImage&#x27;))
 
 install.packages(&quot;Seurat&quot;)
 devtools::install_github(repo = &quot;kueckelj/confuns&quot;)</code></pre><p id="26377858-64dd-4606-8e1e-40de0de905f3" class="">Go back to the terminal  and use conda to install the following:</p><pre id="d7a8ef00-5db0-46a8-ae50-6a6c47b0a044" class="code"><code>conda install -c conda-forge udunits2
-##libgal package downstream will install proj and r-proj4 automatically but I pre-installed in this order of commands
+##libgal package downstream will install proj and r-proj4 automatically 
+##but I pre-installed in this order of commands
 #conda install -c conda-forge r-proj4 
 conda install -c conda-forge r-v8</code></pre><pre id="78118f7c-a709-405e-a987-62e7db803193" class="code"><code>##the commented lines were executed but I&#x27;m not sure those made any difference
 #sudo apt remove libudunits2-dev libgdal-dev libgeos-dev libproj-dev
@@ -677,7 +681,6 @@ install.packages(&quot;arrangements&quot;)</code></pre><p id="68e3d48b-62b1-41bb
 conda install -c conda-forge r-imager</code></pre><pre id="4b3258d7-4e2b-4f33-b1d9-9fb8d3852687" class="code"><code>devtools::install_github(&quot;https://github.com/MarcElosua/SPOTlight&quot;)</code></pre><p id="dcd59f8b-6f96-426f-ab15-08232d5e64c7" class=""><strong>Install Harmony</strong></p><pre id="c3c26598-d41c-46c1-b882-8be2852ea402" class="code"><code>devtools::install_github(&quot;immunogenomics/harmony&quot;)</code></pre><p id="5fc0b74d-8fb1-43ab-b7fd-836aea1e4306" class=""><strong>Install MAGIC</strong></p><pre id="2463b0c5-019f-40f0-85fd-4d58f65c23c6" class="code"><code>conda install -c bioconda scprep
 conda install matplotlib future tasklogger graphtools scipy pandas Deprecated pygsp pytz python-dateutil six threadpoolctl joblib decorator wrapt cycler kiwisolver pyparsing pillow
 conda install -c anaconda zlib
-conda install -c conda-forge pandoc
 R
 install.packages(&quot;Rmagic&quot;)</code></pre><h1 id="5d42454b-4617-4f1d-bfa6-0bc088205a8f" class="">Cluster</h1><p id="4b2a2bc3-abf8-4160-8ae5-05228245a1b7" class="">Load all these modules to be able to install SPATA2 in the cluster</p><pre id="2fb1fda3-85b3-4fbb-949a-34dae4382ac1" class="code"><code>module load R/4.0.1 PROJ/7.0.1 GDAL/2.4.2 GEOS/3.4.2 UDUNITS/2.2.26
 install.packages(&quot;sf&quot;, configure.args = c(sf = &quot;--with-proj-include=/apps/PROJ/7.0.1/include&quot;))</code></pre><p id="bc50090d-41af-4a50-9b74-8da8ced0bb27" class="">
