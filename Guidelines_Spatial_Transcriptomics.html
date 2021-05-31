@@ -677,6 +677,7 @@ install.packages(&quot;arrangements&quot;)</code></pre><p id="68e3d48b-62b1-41bb
 conda install -c conda-forge r-imager</code></pre><pre id="4b3258d7-4e2b-4f33-b1d9-9fb8d3852687" class="code"><code>devtools::install_github(&quot;https://github.com/MarcElosua/SPOTlight&quot;)</code></pre><p id="dcd59f8b-6f96-426f-ab15-08232d5e64c7" class=""><strong>Install Harmony</strong></p><pre id="c3c26598-d41c-46c1-b882-8be2852ea402" class="code"><code>devtools::install_github(&quot;immunogenomics/harmony&quot;)</code></pre><p id="5fc0b74d-8fb1-43ab-b7fd-836aea1e4306" class=""><strong>Install MAGIC</strong></p><pre id="2463b0c5-019f-40f0-85fd-4d58f65c23c6" class="code"><code>conda install -c bioconda scprep
 conda install matplotlib future tasklogger graphtools scipy pandas Deprecated pygsp pytz python-dateutil six threadpoolctl joblib decorator wrapt cycler kiwisolver pyparsing pillow
 conda install -c anaconda zlib
+conda install -c conda-forge pandoc
 R
 install.packages(&quot;Rmagic&quot;)</code></pre><h1 id="5d42454b-4617-4f1d-bfa6-0bc088205a8f" class="">Cluster</h1><p id="4b2a2bc3-abf8-4160-8ae5-05228245a1b7" class="">Load all these modules to be able to install SPATA2 in the cluster</p><pre id="2fb1fda3-85b3-4fbb-949a-34dae4382ac1" class="code"><code>module load R/4.0.1 PROJ/7.0.1 GDAL/2.4.2 GEOS/3.4.2 UDUNITS/2.2.26
 install.packages(&quot;sf&quot;, configure.args = c(sf = &quot;--with-proj-include=/apps/PROJ/7.0.1/include&quot;))</code></pre><p id="bc50090d-41af-4a50-9b74-8da8ced0bb27" class="">
