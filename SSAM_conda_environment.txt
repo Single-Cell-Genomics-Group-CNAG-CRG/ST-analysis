@@ -1,0 +1,23 @@
+# Conda environment to run SSAM - Cell segmentation-free inference of cell types from in situ transcriptomics data
+# github repo: https://github.com/HiDiHlabs/ssam
+
+# Installation tutorial
+https://ssam.readthedocs.io/en/release/userguide/01-tldr.html#installation
+
+# Create conda environment with python, R and libraries
+conda create -n ssam python=3.6
+conda activate ssam
+conda install gxx_linux-64 numpy pip R=3.6 pyarrow=0.15.1
+conda install -c anaconda libxml2 libcurl gxx_linux-64
+
+# Errors to fix
+libcurl4-openssl-dev
+/bin/sh: 1: x86_64-conda_cos6-linux-gnu-cc: not found
+ * deb: libxml2-dev (Debian, Ubuntu, etc)
+
+
+R
+install.packages(c("tidyverse", "sctransform", "feather"))
+
+# Install SSAM via pip:
+pip install ssam
