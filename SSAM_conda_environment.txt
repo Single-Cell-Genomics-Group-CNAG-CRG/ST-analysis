@@ -5,8 +5,14 @@
 https://ssam.readthedocs.io/en/release/userguide/01-tldr.html#installation
 
 # Create conda environment with python, R and libraries
-conda create -n ssam python=3.6
+sudo conda create -n ssam python=3.6
 conda activate ssam
+
+# Specific for Marcs workstation, specifying specific path
+# https://stackoverflow.com/questions/36539623/how-do-i-find-the-name-of-the-conda-environment-in-which-my-code-is-running
+# conda create python=3.6 --prefix /media/data1/anaconda3/envs/ssam
+# conda activate /media/data1/anaconda3/envs/ssam
+
 conda install gxx_linux-64 numpy pip R=3.6 pyarrow=0.15.1
 conda install -c anaconda libxml2 libcurl gxx_linux-64
 
@@ -17,8 +23,16 @@ libcurl4-openssl-dev
  * deb: libxml2-dev (Debian, Ubuntu, etc)
 
 
-R
-install.packages(c("tidyverse", "sctransform", "feather"))
+# R
+# install.packages(c("tidyverse", "sctransform", "feather"))
+
+# Install R packages with conda
+# https://www.biostars.org/p/392722/
+# When using R with conda, some people recommend to install all R packages via conda and not let R install packages. This is because R looks for header files (i.e. dev libraries) in canonical locations where these files are typically located when installed by the OS package manager. For more on R with conda, see this answer on the RStudio forum.
+
+conda install -c conda-forge r-sctransform 
+conda install -c conda-forge r-feather
+
 
 # Install SSAM via pip:
 pip install ssam
