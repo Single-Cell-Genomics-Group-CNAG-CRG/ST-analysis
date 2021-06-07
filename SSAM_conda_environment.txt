@@ -16,13 +16,6 @@ conda activate ssam
 conda install gxx_linux-64 numpy pip R=3.6 pyarrow=0.15.1
 conda install -c anaconda libxml2 libcurl gxx_linux-64
 
-# Errors to fix
-# https://github.com/RcppCore/Rcpp/issues/770
-libcurl4-openssl-dev
-/bin/sh: 1: x86_64-conda_cos6-linux-gnu-cc: not found
- * deb: libxml2-dev (Debian, Ubuntu, etc)
-
-
 # R
 # install.packages(c("tidyverse", "sctransform", "feather"))
 
