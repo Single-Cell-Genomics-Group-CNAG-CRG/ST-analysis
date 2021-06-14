@@ -25,7 +25,8 @@ conda install -c anaconda libxml2 libcurl gxx_linux-64
 
 conda install -c conda-forge r-sctransform 
 conda install -c conda-forge r-feather
-
+# In the clsuter, not needed when I installed this locally
+conda install -c dan_blanchard glibc
 
 # Install SSAM via pip:
 pip install ssam
