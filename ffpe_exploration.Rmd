@@ -1,0 +1,230 @@
+---
+author: "Marc Elosua-Bayes"
+title: "FFPE Exploration"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%", fig.align='center', 
+                      message = FALSE, warning = FALSE)
+options(width = 1200)
+```
+
+## Introduction
+In this Rmarkdown we are going to explore Visium FFPE data.
+
+## FFPE Visium vs Fresh frozen FFPE
+
+Check full description [here](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/what-is-visium-ffpe).
+Visium FFPE has a different concept than their fresh-frozen counterpart. The fresh frozen permeabilizes the tissue, the mRNA hybridize via the poly-A tail with the oligo attached to the bead, then cDNA is synthesized and ultimately sequenced. Since the mRNA in FFPE tissue slices is of lower quality, shorter strands, we need to follow a different approach. FFPE Visium used whole transcriptome DNA probes that hybridizes to the mRNA molecules and is then ligated. These ligation products are released from the tissue and bind with the spatially barcoded oligonucelotides. Ultimately in this for Visium FFPE we sequence the synthetic probe DNA instead of the cDNA. \
+**IMPORTANT, be ware that genes not targete by the probe set will NOT be detected.** \
+
+A more in depth explanation can be found [here](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/algorithms/overview#probe-aligner). \
+
+Briefly, the whole-transcriptome probe panels contain paired probes for each targeted gene sequence. Both probes need to hybridize to the target gene and ligate to each other in order to be counted as a UMI in the final coun matrix, (by default non-ligated probes are removed since they can capturing off-target noise).
+
+**What implications does this have?** \
+Since we are sequencing the DNA probes and not the cDNA we won't be able to detect genetic variants, mRNAs not targeted by the synthetic DNA probes.
+
+**How do we get the count matrix?**
+More info [here](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/glossary#templated-ligation) and [here](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/algorithms/overview#probe-aligner). \
+
+In this case we need to use the latest version of `spaceranger`, v1.3.0. We will use the same command `spaceranger count` but there are 2 main differences: \
+1- Spaceranger in this case uses a [short-read aligner](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/algorithms/overview#probe-aligner) aimed at maximizing the performance when mapping probe sequences. \
+2.1- We need to pass a *probe set* to spaceranger. This probe set contains a whole transcriptome reference file declaring the gene panel used for the experiment. This contains detailed information on the probes used and which genes they target. More info [here](https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/glossary#templated-ligation). \
+2.2- Furhtermore, the probes can have some off-target effect with homologous genes or similar sequences, these probes are by default filtered from the analysis. These can be maintained by adding the flag `--no-probe-filter` when running `spaceranger`.\
+
+## Libraries
+
+```{r}
+library(Seurat)
+library(ggpubr)
+library(cowplot)
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(glue)
+library(stringr)
+library(readr)
+```
+
+## Load data
+Data for this tissue slice can be downloaded directly from 10X public datasets [here](https://support.10xgenomics.com/spatial-gene-expression/datasets/1.3.0/Visium_FFPE_Human_Breast_Cancer?).
+
+```{r}
+se_filtered <- Seurat::Load10X_Spatial(
+  data.dir = here::here("data/"),
+  filename = "Visium_FFPE_Human_Breast_Cancer_filtered_feature_bc_matrix.h5",
+  slice = "ffpe",
+  filter.matrix = TRUE)
+
+
+se_unfiltered <- Seurat::Load10X_Spatial(
+  data.dir = here::here("data/"),
+  filename = "Visium_FFPE_Human_Breast_Cancer_raw_feature_bc_matrix.h5",
+  slice = "ffpe",
+  filter.matrix = FALSE)
+```
+
+## Exploration
+
+### Visual inspection
+```{r}
+p1 <- Seurat::SpatialPlot(
+  object = se_unfiltered,
+  features = c("nCount_Spatial", "nFeature_Spatial"),
+  image.alpha = 0)
+
+p2 <- Seurat::SpatialPlot(
+    object = se_unfiltered,
+    features = "nCount_Spatial",
+    image.alpha = 1,
+    alpha = c(0, 0)) + Seurat::NoLegend()
+
+p1 + p2
+```
+
+
+Add mitochondrial and ribosomal %
+```{r}
+# Collect all genes coded on the mitochondrial genome
+se_unfiltered[["percent.mito"]] <- Seurat::PercentageFeatureSet(
+  object = se_unfiltered,
+  pattern = "^MT-")
+summary(se_unfiltered[["percent.mito"]])
+
+# Collect all genes coding for ribosomal proteins
+se_unfiltered[["percent.ribo"]] <- Seurat::PercentageFeatureSet(
+  object = se_unfiltered,
+  pattern = "^RPL|^RPS")
+summary(se_unfiltered[["percent.ribo"]])
+```
+
+We can see how the DNA probes ignore mitochondrial and ribosomal genes are widely excluded from the analysis since they are most likely not targeted by the probe set. This is definitely something to keep in mind when analyzing this type of data.
+
+```{r}
+Seurat::SpatialPlot(
+  object = se_unfiltered,
+  features = c("percent.mito", "percent.ribo"),
+  image.alpha = 0)
+```
+
+### Count matrix inspection
+Next we also want to take a look at the count matrix since the method used to obtain the UMI counts differs from scRNAseq and Fresh-Frozen Visium.
+
+```{r}
+se_unfiltered@assays$Spatial@counts[1:15, 1:15]
+
+# How many genes do we detect
+dim(se_unfiltered@assays$Spatial@counts)
+
+# Lets look at the how many UMIs we detect per spot
+Hmisc::describe(sparseMatrixStats::colSums2(se_unfiltered@assays$Spatial@counts))
+
+# Lets look at the how many UMI's we detect per gene
+Hmisc::describe(sparseMatrixStats::rowSums2(se_unfiltered@assays$Spatial@counts))
+```
+
+### Normalization
+
+#### log-normalization vs SCTransform
+We want to see which normalization method most effectively reduces the technical bias in the data.
+We follow the comparison approach detailed in this [Vignette](https://satijalab.org/seurat/articles/spatial_vignette.html).
+
+Log-normalization using Seurat
+```{r}
+# also run standard log normalization for comparison
+se_filtered <- Seurat::NormalizeData(se_filtered,
+                                     verbose = FALSE,
+                                     assay = "Spatial")
+```
+
+SCTransform normalization
+```{r}
+# rerun normalization to store sctransform residuals for all genes
+se_filtered <- Seurat::SCTransform(se_filtered,
+                                   assay = "Spatial",
+                                   return.only.var.genes = FALSE,
+                                   verbose = FALSE)
+```
+
+
+Computes the correlation of the log normalized data and sctransform residuals with the number of UMIs per gene
+```{r}
+se_filtered <- Seurat::GroupCorrelation(
+  se_filtered,
+  group.assay = "Spatial",
+  assay = "Spatial",
+  slot = "data",
+  do.plot = FALSE)
+
+se_filtered <- Seurat::GroupCorrelation(
+  se_filtered,
+  group.assay = "Spatial",
+  assay = "SCT",
+  slot = "scale.data",
+  do.plot = FALSE)
+```
+
+Visualize the correlation between grouped by the mean expression
+```{r}
+p1 <- Seurat::GroupCorrelationPlot(
+  se_filtered,
+  assay = "Spatial",
+  cor = "nCount_Spatial_cor") +
+  ggplot2::ggtitle("Log Normalization") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+p2 <- Seurat::GroupCorrelationPlot(
+  se_filtered,
+  assay = "SCT",
+  cor = "nCount_Spatial_cor") +
+  ggplot2::ggtitle("SCTransform Normalization") + 
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+p1 + p2
+```
+
+From the boxplot above we can see how SCT is slightly better at removing the technical noise, specially in those genes with high UMI counts. 
+
+#### Mean-Variance relation
+Next we want to see if the log-normalization effectively removes the mean-variance relationship.
+For this we will use the filtered seurat object which contains only the spots overlapping the tissue.
+
+Mean-Variance relation pre-normalization
+```{r}
+p1 <- SCrafty::mean_variance_plot(
+  se_obj = se_filtered,
+  assay = "Spatial",
+  slot = "counts") +
+  ggplot2::ggtitle("Raw counts")
+
+p2 <- SCrafty::mean_variance_plot(
+  se_obj = se_filtered,
+  assay = "Spatial",
+  slot = "data") +
+  ggplot2::ggtitle("Log Normalization")
+
+p3 <- SCrafty::mean_variance_plot(
+  se_obj = se_filtered,
+  assay = "SCT",
+  slot = "data") +
+  ggplot2::ggtitle("SCTransform Normalization")
+
+p1 / p2 / p3
+```
+
+In the above plots we can see how both log normalization and `SCTransform` equally remove the mean variance relation.
+
+## Session Info
+```{r}
+sessionInfo()
+```
+
