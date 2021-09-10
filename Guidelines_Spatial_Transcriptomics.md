@@ -186,3 +186,8 @@ Load all these modules to be able to install SPATA2 in the cluster
 module load R/4.0.1 PROJ/7.0.1 GDAL/2.4.2 GEOS/3.4.2 UDUNITS/2.2.26
 install.packages("sf", configure.args = c(sf = "--with-proj-include=/apps/PROJ/7.0.1/include"))
 ```
+
+# Reactome
+```r
+BiocManager::install("ReactomeGSA")
+```
