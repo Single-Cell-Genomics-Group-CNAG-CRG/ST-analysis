@@ -191,3 +191,9 @@ install.packages("sf", configure.args = c(sf = "--with-proj-include=/apps/PROJ/7
 ```r
 BiocManager::install("ReactomeGSA")
 ```
+
+# Misc packagesd
+Flextable for pretty tables
+```
+ conda install -c conda-forge r-flextable 
+```
