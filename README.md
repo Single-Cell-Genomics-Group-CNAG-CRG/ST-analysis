@@ -77,6 +77,9 @@ Things to keep in mind when pre-processing the data
 <img src="img/spaceranger-v1.1.0_read-length.png" width="500">
 - Make sure the slice images form the Visium slide contain all the dotted borders and corners. These are necessary to automatically align the image and the spots.
 
+## Sub-cellular tools
+- {[ISHFactor](https://www.biorxiv.org/content/10.1101/2021.11.04.467354v1): a probabilistic model that combines the benefits of spatial, non-negative factor analysis with a Poisson point process likelihood to explicitly model and account for the nature of single-molecule resolved data. [Github](https://github.com/bioFAM/FISHFactor)
+
 ## QC
 [STUtility](https://ludvigla.github.io/STUtility_web_site/Quality_Control.html) shows a great workflow on how to carry out QC analysis on ST data!
 - Remove all spots not overlapping tissue. When there are tissueless regions within the capture areas, especially within the tissue there might be some lateral diffusion and reads may map to those spots. It is important to remove those spots manually using spaceranger prior to alignment!
