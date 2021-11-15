@@ -72,6 +72,10 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 - [Automatic Lymphocyte Detection on Gastric Cancer IHC Images Using Deep Learning](https://ieeexplore.ieee.org/document/8104187): Tumor-infiltrating lymphocytes (TILs) have received considerable attention in recent years, as evidence suggests they are related to cancer prognosis. Distribution and localization of these and other types of immune cells are of special interest for pathologists, and frequently involve manual examination on Immunohistochemistry (IHC) Images. We present a model based on Deep Convolutional Neural Networks for Automatic lymphocyte detection on IHC images of gastric cancer. The dataset created as part of this work is publicly available for future research.
 - [Convolutional Neural Networks for Lymphocyte detection in Immunohistochemically Stained Whole-Slide Images](https://openreview.net/forum?id=rk0xLisiM): 
 - [https://pubmed.ncbi.nlm.nih.gov/31476576/](https://pubmed.ncbi.nlm.nih.gov/31476576/):
+
+## General clustering
+- [Dimension reduction with R](https://rpubs.com/Saskia/520216)
+
 ## General Comments
 Things to keep in mind when pre-processing the data
 
