@@ -57,6 +57,7 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 - [Stereoscope](https://github.com/almaan/stereoscope) developed by Alma Andersson from Lundeberg Lab.
 - [cell2location](https://github.com/BayraktarLab/cell2location) developed by Vitalii Kleshchevnikov from Bayraktar lab. 
 - [Robust Cell Type Decomposition](https://github.com/dmcable/RCTD) developed by Dylan M. Cable from Irizarry lab.
+- [Tangram](https://github.com/broadinstitute/Tangram) Tangram is a Python package, written in PyTorch, for mapping single-cell (or single-nucleus) gene expression data onto spatial gene expression data. The single-cell dataset and the spatial dataset should be collected from the same anatomical region/tissue type, ideally from a biological replicate, and need to share a set of genes (usually from twenty to a thousand). Tangram aligns the single-cell data in space by fitting gene expression on those genes. We mostly work with transcriptomic data (typically 10Xv3 for scRNAseq data; MERFISH or Visium as spatial data).
 
 #### Cell-Cell interactions
 - [CellPhoneDB](https://github.com/Teichlab/cellphonedb) developed by Roser Vento. CellPhoneDB is a publicly available repository of curated receptors, ligands and their interactions. Subunit architecture is included for both ligands and receptors, representing heteromeric complexes accurately. This is crucial, as cell-cell communication relies on multi-subunit protein complexes that go beyond the binary representation used in most databases and studies.
@@ -72,6 +73,15 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 - [Automatic Lymphocyte Detection on Gastric Cancer IHC Images Using Deep Learning](https://ieeexplore.ieee.org/document/8104187): Tumor-infiltrating lymphocytes (TILs) have received considerable attention in recent years, as evidence suggests they are related to cancer prognosis. Distribution and localization of these and other types of immune cells are of special interest for pathologists, and frequently involve manual examination on Immunohistochemistry (IHC) Images. We present a model based on Deep Convolutional Neural Networks for Automatic lymphocyte detection on IHC images of gastric cancer. The dataset created as part of this work is publicly available for future research.
 - [Convolutional Neural Networks for Lymphocyte detection in Immunohistochemically Stained Whole-Slide Images](https://openreview.net/forum?id=rk0xLisiM): 
 - [https://pubmed.ncbi.nlm.nih.gov/31476576/](https://pubmed.ncbi.nlm.nih.gov/31476576/):
+
+## ST integration
+- [eggplant](https://github.com/almaan/eggplant):  a new method to create common coordinate frameworks (CCFs) for spatial transcriptomics data! In it, we show examples of spatiotemporal modeling and introduce "spatial arithmetics". Preprint [here](https://www.biorxiv.org/content/10.1101/2021.11.11.468178v1?rss=1). \
+- [spacemake](https://github.com/rajewsky-lab/spacemake): processing and analysis of large-scale spatial transcriptomics data. preprint [here](https://www.biorxiv.org/content/10.1101/2021.11.07.467598v1). \
+
+
+## FISH
+- [FISHFactor](https://github.com/bioFAM/FISHFactor/blob/master/README.md): FISHFactor extracts subcellular expression patterns from single-molecule data, identifies spatial gene clusters and dissects cell-cell heterogeneity. preprint [here](https://www.biorxiv.org/content/10.1101/2021.11.04.467354v1).
+
 
 ## General clustering
 - [Dimension reduction with R](https://rpubs.com/Saskia/520216)
