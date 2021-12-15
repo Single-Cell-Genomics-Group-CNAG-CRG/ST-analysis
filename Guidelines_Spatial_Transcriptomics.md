@@ -197,3 +197,8 @@ Flextable for pretty tables
 ```
  conda install -c conda-forge r-flextable 
 ```
+
+# MsigDB
+```r
+install.packages("msigdbr")
+```
