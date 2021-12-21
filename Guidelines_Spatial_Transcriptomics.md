@@ -202,3 +202,9 @@ Flextable for pretty tables
 ```r
 install.packages("msigdbr")
 ```
+
+# ggrastr
+B
+```r
+install.packages("ggrastr")
+```
