@@ -208,3 +208,8 @@ B
 ```r
 install.packages("ggrastr")
 ```
+
+# Gene signature
+```r
+remotes::install_github("carmonalab/UCell")
+```
