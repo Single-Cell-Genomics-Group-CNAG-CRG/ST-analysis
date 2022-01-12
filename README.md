@@ -73,6 +73,8 @@ Very nice summary of the tools [here](http://spatialgiotto.rc.fas.harvard.edu/gi
 - [Automatic Lymphocyte Detection on Gastric Cancer IHC Images Using Deep Learning](https://ieeexplore.ieee.org/document/8104187): Tumor-infiltrating lymphocytes (TILs) have received considerable attention in recent years, as evidence suggests they are related to cancer prognosis. Distribution and localization of these and other types of immune cells are of special interest for pathologists, and frequently involve manual examination on Immunohistochemistry (IHC) Images. We present a model based on Deep Convolutional Neural Networks for Automatic lymphocyte detection on IHC images of gastric cancer. The dataset created as part of this work is publicly available for future research.
 - [Convolutional Neural Networks for Lymphocyte detection in Immunohistochemically Stained Whole-Slide Images](https://openreview.net/forum?id=rk0xLisiM): 
 - [https://pubmed.ncbi.nlm.nih.gov/31476576/](https://pubmed.ncbi.nlm.nih.gov/31476576/):
+- [Deep data fusion](https://www.nature.com/articles/s41587-021-01075-3)
+
 
 ## ST integration
 - [eggplant](https://github.com/almaan/eggplant):  a new method to create common coordinate frameworks (CCFs) for spatial transcriptomics data! In it, we show examples of spatiotemporal modeling and introduce "spatial arithmetics". Preprint [here](https://www.biorxiv.org/content/10.1101/2021.11.11.468178v1?rss=1). \
