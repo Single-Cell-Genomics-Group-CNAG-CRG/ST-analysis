@@ -51,6 +51,8 @@ R
 
 ```r
 BiocManager::install("biomaRt")
+# Had to install locfit through here since it didn't let me install via install.packages()
+conda install -c conda-forge r-locfit
 BiocManager::install("scran")
 devtools::install_github("diazlab/CONICS/CONICSmat", dep = TRUE)
 ```
