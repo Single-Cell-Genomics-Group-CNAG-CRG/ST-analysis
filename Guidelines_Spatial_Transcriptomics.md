@@ -102,6 +102,7 @@ install.packages("rmarkdown")
 install.packages("knitr")
 install.packages("DT")
 install.packages("here")
+install.packages("glue")
 
 if (!requireNamespace("remotes", quietly = TRUE)) {
   install.packages("remotes")
