@@ -18,7 +18,6 @@ The following package is a dependency for some of the BiocManager packages that 
 
 ```bash
 conda install -c eumetsat fftw3
-conda install python=3.9
 #conda install -c conda-forge imagemagick #necessary for the cluster
 #conda install -c conda-forge pandoc #necessary for the cluster
 ```
