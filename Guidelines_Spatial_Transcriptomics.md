@@ -7,7 +7,7 @@ This is a guide to install basic tools for ST analysis using a conda environment
 This HTML was created with Notion. In Notion, you can create `inline code snippets` with the shortcut `cmd/ctrl + e`.
 
 ```bash
-conda create -n spatial_r python=3.9
+conda create -n spatial_r
 conda activate spatial_r
 conda install -c conda-forge r-base=4.0.1
 ```
@@ -18,6 +18,7 @@ The following package is a dependency for some of the BiocManager packages that 
 
 ```bash
 conda install -c eumetsat fftw3
+conda install python=3.9
 #conda install -c conda-forge imagemagick #necessary for the cluster
 #conda install -c conda-forge pandoc #necessary for the cluster
 ```
