@@ -96,7 +96,7 @@ devtools::install_github('cole-trapnell-lab/leidenbase')
 ```r
 install.packages("tidyverse")
 install.packages("gt")
-conda install -c conda-forge r-ggpubr 
+# conda install -c conda-forge r-ggpubr 
 # install.packages("ggpubr")
 install.packages("ggrepel")
 install.packages("rmarkdown")
