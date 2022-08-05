@@ -96,7 +96,8 @@ devtools::install_github('cole-trapnell-lab/leidenbase')
 ```r
 install.packages("tidyverse")
 install.packages("gt")
-install.packages("ggpubr")
+conda install -c conda-forge r-ggpubr 
+# install.packages("ggpubr")
 install.packages("ggrepel")
 install.packages("rmarkdown")
 install.packages("knitr")
@@ -119,13 +120,13 @@ remotes::install_github("saezlab/mistyR")
 
 BiocManager::install("progeny")
 BiocManager::install("dorothea")
+BiocManager::install("decoupleR")
 
 install.packages("corrplot")
 install.packages("ggcorrplot")
 BiocManager::install("AnnotationDbi")
 BiocManager::install("GOstats")
-devtools::install_github("Single-Cell-Genomics-Group-CNAG-CRG/CNAGSCG-package", 
-ref = "main")
+devtools::install_github("Single-Cell-Genomics-Group-CNAG-CRG/SCrafty-package", ref = "main")
 install.packages("svglite")
 BiocManager::install("clusterProfiler")
 BiocManager::install("org.Mm.eg.db")
