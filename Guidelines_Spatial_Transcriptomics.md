@@ -116,8 +116,7 @@ devtools::install_github(
     "jbergenstrahle/STUtility"
 )
 
-remotes::install_github("saezlab/mistyR")
-
+BiocManager::install("mistyR")
 BiocManager::install("progeny")
 BiocManager::install("dorothea")
 BiocManager::install("decoupleR")
