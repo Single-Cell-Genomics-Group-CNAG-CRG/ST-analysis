@@ -1,8 +1,12 @@
+```
 conda create --name spatial_r2
 conda activate spatial_r2
+```
+
 
 #### Initialize bioconda - https://bioconda.github.io/
 Initialize the channels from where to install the packages
+
 ```
 conda config --add channels defaults
 conda config --add channels bioconda
