@@ -1,7 +1,10 @@
+```
 conda create --name spatial_r2
 conda activate spatial_r2
+```
 
 ## Install R and R packages from CRAN
+```
 conda install -c conda-forge r-base 
 conda install -c conda-forge r-essentials
 conda install -c conda-forge r-tidyverse
@@ -24,16 +27,19 @@ conda install -c conda-forge r-flextable
 conda install -c conda-forge r-msigdbr
 conda install -c conda-forge r-ggrastr
 conda install -c conda-forge r-matrix.utils 
-
+```
 
 ## Install Bioconda-Bioconductor packages
 
 #### Initialize bioconda - https://bioconda.github.io/
+```
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --set channel_priority strict
+```
 
+```
 # Seurat doesn't exists in bioconda, we are going to need to install it with conda forge
 # conda install -c bioconda r-seurat 
 conda install -c conda-forge r-seurat 
@@ -59,8 +65,10 @@ conda install -c bioconda bioconductor-org.hs.eg.db
 conda install -c bioconda bioconductor-biomart 
 conda install -c bioconda bioconductor-scran 
 conda install -c bioturing r-spotlight 
+```
 
 ## Github packages
+```
 devtools::install_github("immunogenomics/harmony")
 devtools::install_github("jbergenstrahle/STUtility")
 remotes::install_github("mojaveazure/seurat-disk")
@@ -70,3 +78,4 @@ devtools::install_github("broadinstitute/infercnv")
 devtools::install_github("diazlab/CONICS/CONICSmat", dep = TRUE)
 devtools::install_github(repo = "kueckelj/confuns")
 devtools::install_github(repo = "theMILOlab/SPATA2")
+```
