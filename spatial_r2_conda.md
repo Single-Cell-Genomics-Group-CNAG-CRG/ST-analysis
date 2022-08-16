@@ -105,6 +105,7 @@ devtools::install_github("broadinstitute/infercnv")
 devtools::install_github("diazlab/CONICS/CONICSmat", dep = TRUE)
 devtools::install_github(repo = "kueckelj/confuns")
 devtools::install_github(repo = "MarcElosua/SPOTlight")
+devtools::install_github("Single-Cell-Genomics-Group-CNAG-CRG/SCrafty-package", ref = "main")
 # ERROR: dependencies ‘concaveman’, ‘ggalt’, ‘magick’ are not available for package ‘SPATA2’
 # conda install -y -c conda-forge r-concaveman 
 devtools::install_github(repo = "theMILOlab/SPATA2")
