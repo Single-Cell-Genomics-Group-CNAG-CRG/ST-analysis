@@ -38,44 +38,76 @@ conda install -y -c conda-forge r-flextable
 conda install -y -c conda-forge r-msigdbr
 conda install -y -c conda-forge r-ggrastr
 conda install -y -c conda-forge r-matrix.utils 
-conda install -y -c conda-forge r-seurat 
+conda install -y -c conda-forge r-seurat
+conda install -y -c conda-forge r-biocmanager
+conda install -y -c conda-forge r-pheatmap
+conda install -y -c conda-forge r-hdf5r 
+# conda install -y -c conda-forge r-terra 
 ```
 
 ## Install Bioconductor packages
 ```
-conda install -y -c bioconda bioconductor-reactomegsa
-conda install -y -c bioconda bioconductor-biocgenerics
-conda install -y -c bioconda bioconductor-delayedarray
-conda install -y -c bioconda bioconductor-delayedmatrixstats 
-conda install -y -c bioconda bioconductor-limma 
-conda install -y -c bioconda bioconductor-s4vectors 
-conda install -y -c bioconda bioconductor-singlecellexperiment
-conda install -y -c bioconda bioconductor-summarizedexperiment 
-conda install -y -c bioconda bioconductor-batchelor 
-conda install -y -c bioconda bioconductor-ebimage 
-conda install -y -c bioconda bioconductor-mistyr 
-conda install -y -c bioconda bioconductor-progeny 
-conda install -y -c bioconda bioconductor-dorothea
-conda install -y -c bioconda bioconductor-decoupler 
-conda install -y -c bioconda bioconductor-annotationdbi 
-conda install -y -c bioconda bioconductor-gostats 
-conda install -y -c bioconda bioconductor-clusterprofiler 
-conda install -y -c bioconda bioconductor-org.mm.eg.db
-conda install -y -c bioconda bioconductor-org.hs.eg.db 
-conda install -y -c bioconda bioconductor-biomart 
-conda install -y -c bioconda bioconductor-scran 
-conda install -y -c bioturing r-spotlight 
+conda install -y bioconductor-reactomegsa
+conda install -y bioconductor-biocgenerics
+conda install -y bioconductor-delayedarray
+conda install -y bioconductor-delayedmatrixstats 
+conda install -y bioconductor-limma 
+conda install -y bioconductor-s4vectors 
+# Due to a  conda issue we had to install the dependency GenomeInfoDbData through R. Issue [here](https://github.com/bioconda/bioconda-recipes/issues/13846)
+BiocManager::install("GenomeInfoDbData")
+BiocManager::install("SingleCellExperiment")
+BiocManager::install("SummarizedExperiment")
+BiocManager::install("batchelor")
+BiocManager::install("mistyR")
+BiocManager::install("progeny")
+BiocManager::install("dorothea")
+BiocManager::install("decoupleR")
+BiocManager::install("liana")
+BiocManager::install("AnnotationDbi")
+BiocManager::install("GOstats")
+BiocManager::install("clusterProfiler")
+BiocManager::install("org.Mm.eg.db")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("biomaRt")
+BiocManager::install("scran")
+BiocManager::install("ComplexHeatmap")
+
+# ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
+# install fftwtools from bioconda
+conda install -y r-fftwtools 
+BiocManager::install("EBImage")
+
+# conda install -y bioconductor-singlecellexperiment
+# conda install -y bioconductor-summarizedexperiment 
+# conda install -y bioconductor-batchelor 
+# conda install -y bioconductor-ebimage 
+# conda install -y bioconductor-mistyr 
+# conda install -y bioconductor-progeny 
+# conda install -y bioconductor-dorothea
+# conda install -y bioconductor-decoupler 
+# conda install -y bioconductor-annotationdbi 
+# conda install -y bioconductor-gostats 
+# conda install -y bioconductor-clusterprofiler 
+# conda install -y bioconductor-org.mm.eg.db
+# conda install -y bioconductor-org.hs.eg.db 
+# conda install -y bioconductor-biomart 
+# conda install -y bioconductor-scran
+
 ```
 
 ## Github packages
 ```
 devtools::install_github("immunogenomics/harmony")
-devtools::install_github("jbergenstrahle/STUtility")
+# requires r-terra installed with conda-forge
 remotes::install_github("mojaveazure/seurat-disk")
-remotes::install_github("carmonalab/UCell")
 devtools::install_github('cole-trapnell-lab/leidenbase')
 devtools::install_github("broadinstitute/infercnv")
 devtools::install_github("diazlab/CONICS/CONICSmat", dep = TRUE)
 devtools::install_github(repo = "kueckelj/confuns")
+devtools::install_github(repo = "MarcElosua/SPOTlight")
+# ERROR: dependencies ‘concaveman’, ‘ggalt’, ‘magick’ are not available for package ‘SPATA2’
+# conda install -y -c conda-forge r-concaveman 
 devtools::install_github(repo = "theMILOlab/SPATA2")
+# devtools::install_github("jbergenstrahle/STUtility")
+# remotes::install_github("carmonalab/UCell")
 ```
