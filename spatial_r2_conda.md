@@ -71,6 +71,7 @@ BiocManager::install("org.Hs.eg.db")
 BiocManager::install("biomaRt")
 BiocManager::install("scran")
 BiocManager::install("ComplexHeatmap")
+BiocManager::install("SpatialExperiment")
 
 # ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
 # install fftwtools from bioconda
