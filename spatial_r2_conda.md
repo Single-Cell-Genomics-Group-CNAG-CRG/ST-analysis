@@ -73,6 +73,8 @@ BiocManager::install("scran")
 BiocManager::install("ComplexHeatmap")
 BiocManager::install("SpatialExperiment")
 BiocManager::install("nnSVG")
+BiocManager::install("BayesSpace")
+
 # ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
 # install fftwtools from bioconda
 conda install -y r-fftwtools 
