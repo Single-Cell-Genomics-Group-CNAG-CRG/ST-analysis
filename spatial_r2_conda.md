@@ -75,7 +75,7 @@ BiocManager::install("ComplexHeatmap")
 BiocManager::install("SpatialExperiment")
 BiocManager::install("nnSVG")
 BiocManager::install("BayesSpace")
-BiocManager::install("UCell")
+# BiocManager::install("UCell")
 
 # ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
 # install fftwtools from bioconda
@@ -116,4 +116,5 @@ devtools::install_github("Single-Cell-Genomics-Group-CNAG-CRG/SCrafty-package", 
 devtools::install_github(repo = "theMILOlab/SPATA2")
 # devtools::install_github("jbergenstrahle/STUtility")
 # remotes::install_github("carmonalab/UCell")
+remotes::install_github("carmonalab/UCell", ref="v1.3")
 ```
