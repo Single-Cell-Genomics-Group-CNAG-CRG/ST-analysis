@@ -42,7 +42,8 @@ conda install -y -c conda-forge r-seurat
 conda install -y -c conda-forge r-biocmanager
 conda install -y -c conda-forge r-pheatmap
 conda install -y -c conda-forge r-hdf5r 
-# conda install -y -c conda-forge r-terra 
+# conda install -y -c conda-forge r-terra
+install.packages("colorBlindness")
 ```
 
 ## Install Bioconductor packages
@@ -74,6 +75,7 @@ BiocManager::install("ComplexHeatmap")
 BiocManager::install("SpatialExperiment")
 BiocManager::install("nnSVG")
 BiocManager::install("BayesSpace")
+BiocManager::install("UCell")
 
 # ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
 # install fftwtools from bioconda
