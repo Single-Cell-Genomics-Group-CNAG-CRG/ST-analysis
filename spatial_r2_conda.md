@@ -44,6 +44,8 @@ conda install -y -c conda-forge r-pheatmap
 conda install -y -c conda-forge r-hdf5r 
 # conda install -y -c conda-forge r-terra
 install.packages("colorBlindness")
+# module load CMake/3.23.1-GCCcore-11.3.0
+install.packages("ggpubr")
 ```
 
 ## Install Bioconductor packages
