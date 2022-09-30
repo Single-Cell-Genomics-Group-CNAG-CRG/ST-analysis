@@ -117,4 +117,5 @@ devtools::install_github(repo = "theMILOlab/SPATA2")
 # devtools::install_github("jbergenstrahle/STUtility")
 # remotes::install_github("carmonalab/UCell")
 remotes::install_github("carmonalab/UCell", ref="v1.3")
+devtools::install_github("sqjin/CellChat")
 ```
