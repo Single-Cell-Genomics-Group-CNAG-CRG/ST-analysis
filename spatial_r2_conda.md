@@ -42,8 +42,8 @@ conda install -y -c conda-forge r-seurat
 conda install -y -c conda-forge r-biocmanager
 conda install -y -c conda-forge r-pheatmap
 conda install -y -c conda-forge r-hdf5r 
-conda install -c conda-forge r-ggsci
-conda install -c conda-forge r-rio
+conda install -y -c conda-forge r-ggsci
+conda install -y -c conda-forge r-rio
 # conda install -y -c conda-forge r-terra
 install.packages("colorBlindness")
 # module load CMake/3.23.1-GCCcore-11.3.0
