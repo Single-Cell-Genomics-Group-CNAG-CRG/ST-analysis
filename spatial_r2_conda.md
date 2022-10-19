@@ -48,6 +48,7 @@ conda install -y -c conda-forge r-rio
 install.packages("colorBlindness")
 # module load CMake/3.23.1-GCCcore-11.3.0
 install.packages("ggpubr")
+install.packages("RcppML")
 ```
 
 ## Install Bioconductor packages
