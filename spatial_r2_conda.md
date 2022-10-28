@@ -124,4 +124,5 @@ devtools::install_github(repo = "theMILOlab/SPATA2")
 remotes::install_github("carmonalab/UCell", ref="v1.3")
 devtools::install_github("sqjin/CellChat")
 devtools::install_github("massonix/HCATonsilData", build_vignettes = FALSE)
+remotes::install_github('saezlab/liana')
 ```
