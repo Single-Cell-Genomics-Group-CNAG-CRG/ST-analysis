@@ -49,6 +49,7 @@ install.packages("colorBlindness")
 # module load CMake/3.23.1-GCCcore-11.3.0
 install.packages("ggpubr")
 install.packages("RcppML")
+/scratch/groups/singlecell/software/anaconda3/envs/spatial_r2/bin/pip3 install magic-impute
 ```
 
 ## Install Bioconductor packages
