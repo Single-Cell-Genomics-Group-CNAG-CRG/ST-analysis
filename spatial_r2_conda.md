@@ -82,6 +82,7 @@ BiocManager::install("ComplexHeatmap")
 BiocManager::install("SpatialExperiment")
 BiocManager::install("nnSVG")
 BiocManager::install("BayesSpace")
+BiocManager::install("SingleR")
 # BiocManager::install("UCell")
 
 # ERROR: dependency ‘fftwtools’ is not available for package ‘EBImage’
