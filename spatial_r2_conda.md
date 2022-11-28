@@ -61,7 +61,7 @@ conda install -y bioconductor-delayedarray
 conda install -y bioconductor-delayedmatrixstats 
 conda install -y bioconductor-limma 
 conda install -y bioconductor-s4vectors 
-conda install -y -c bioconda scrublet 
+# conda install -y -c bioconda scrublet 
 # Due to a  conda issue we had to install the dependency GenomeInfoDbData through R. Issue [here](https://github.com/bioconda/bioconda-recipes/issues/13846)
 BiocManager::install("GenomeInfoDbData")
 BiocManager::install("SingleCellExperiment")
