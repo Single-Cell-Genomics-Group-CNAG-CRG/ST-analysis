@@ -50,6 +50,7 @@ install.packages("colorBlindness")
 install.packages("ggpubr")
 install.packages("RcppML")
 install.packages('SoupX')
+install.packages("fastTopics")
 /scratch/groups/singlecell/software/anaconda3/envs/spatial_r2/bin/pip3 install magic-impute
 ```
 
