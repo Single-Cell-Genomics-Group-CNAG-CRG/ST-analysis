@@ -44,6 +44,7 @@ conda install -y -c conda-forge r-pheatmap
 conda install -y -c conda-forge r-hdf5r 
 conda install -y -c conda-forge r-ggsci
 conda install -y -c conda-forge r-rio
+conda install -c conda-forge r-rhpcblasctl
 # conda install -y -c conda-forge r-terra
 install.packages("colorBlindness")
 # module load CMake/3.23.1-GCCcore-11.3.0
@@ -131,4 +132,5 @@ devtools::install_github("sqjin/CellChat")
 devtools::install_github("massonix/HCATonsilData", build_vignettes = FALSE)
 remotes::install_github('saezlab/liana')
 devtools::install_github('xzhoulab/SPARK')
+devtools::install_github("zdebruine/singlet")
 ```
