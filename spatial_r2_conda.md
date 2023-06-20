@@ -49,7 +49,7 @@ conda install -c conda-forge r-rhpcblasctl
 install.packages("colorBlindness")
 # module load CMake/3.23.1-GCCcore-11.3.0
 install.packages("ggpubr")
-install.packages("RcppML")
+# install.packages("RcppML")
 install.packages('SoupX')
 install.packages("fastTopics")
 /scratch/groups/singlecell/software/anaconda3/envs/spatial_r2/bin/pip3 install magic-impute
@@ -132,5 +132,6 @@ devtools::install_github("sqjin/CellChat")
 devtools::install_github("massonix/HCATonsilData", build_vignettes = FALSE)
 remotes::install_github('saezlab/liana')
 devtools::install_github('xzhoulab/SPARK')
+devtools::install_github("zdebruine/RcppML")
 devtools::install_github("zdebruine/singlet")
 ```
